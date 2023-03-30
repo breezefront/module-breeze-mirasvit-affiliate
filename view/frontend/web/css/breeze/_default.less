@@ -1,0 +1,45 @@
+.lib-clearfix() {
+    &:before,
+    &:after {
+        content: '';
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@color-white-smoke: #f5f5f5;
+@color-gray80: #ccc;
+@color-white: #fff;
+
+& when (@critical) {
+    .affiliate__widget-tabs {
+        &:extend(.breeze-tabs all);
+        > [data-role="collapsible"] {
+            &:extend(.breeze-tab-toggler all);
+            &[aria-expanded="true"] {
+                &:extend(.breeze-tab-toggler-active all);
+            }
+            &:nth-child(1):not([aria-expanded]) {
+                &:extend(.breeze-tab-toggler-active all);
+            }
+        }
+
+        > [data-role="content"] {
+            &:extend(.breeze-tab-content);
+            &[aria-hidden="false"] {
+                &:extend(.breeze-tab-content-active all);
+            }
+            &:nth-child(2):not([aria-hidden]) {
+                &:extend(.breeze-tab-content-active all);
+            }
+        }
+    }
+}
+
+& when not (@critical) {
+    @import "Mirasvit_Affiliate::css/source/module/_account.less";
+    @import "Mirasvit_Affiliate::css/source/module/_widget.less";
+}
